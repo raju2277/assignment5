@@ -10,20 +10,60 @@
      <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
      <!-- google fonts -->
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+
+      <!-- style -->
+       <style>
+        #login-container{
+            font-family: "Geist", sans-serif;
+        }
+
+        
+       </style>
 </head>
 <body>
-     <section>
-         <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-            <legend class="fieldset-legend">Login</legend>
+     <section id="login-container" class="flex justify-center items-center mt-30">
+         <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-sm lg:w-3/9 border p-4">
+            <div class="space-y-2">
+               <span class="flex justify-center"> <img src="./B13-A5-Github-Issue-Tracker/assets/github-logo.png" alt=""></span>
 
-            <label class="label">Email</label>
-            <input type="email" class="input" placeholder="Email" />
+               <h2 class="text-center text-2xl text-[#000000] font-bold">GitHub Issues Tracker</h2>
+
+               <p class="text-center text-[#64748B] text-[16px]">Sign in to manage your issues</p>
+            </div>
+            <!-- <legend class="fieldset-legend">Login</legend> -->
+
+            <label class="label">Username</label>
+            <input id="email" type="email" class="input w-full" placeholder="Enter Username" />
 
             <label class="label">Password</label>
-            <input type="password" class="input" placeholder="Password" />
+            <input id="password" type="password" class="input w-full" placeholder="Enter Password" />
 
-            <button class="btn btn-neutral mt-4">Login</button>
+            <button onclick="login()" class="btn btn-primary mt-4">Login</button>
+
+            <p class="text-xl text-[#1F2937] text-center">Or</p>
+            <p class="flex justify-center text-2xl opacity-70"><a href="" class="underline ">Forgot password?</a></p>
          </fieldset>
      </section>
+
+     <!-- login error modal -->
+      <!-- Open the modal using ID.showModal() method -->
+        <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box">
+            <h3 class="text-lg font-bold">Sorry!</h3>
+            <p class="py-4">Wrong Username & Password Please Try Again!</p>
+            <div class="modal-action">
+            <form method="dialog">
+                <!-- if there is a button in form, it will close the modal -->
+                <button class="btn">Close</button>
+            </form>
+            </div>
+        </div>
+        </dialog>
+            
+
+     <script src="./login.js"></script>
 </body>
 </html>
