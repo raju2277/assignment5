@@ -6,7 +6,7 @@ function login(){
     let defaultPassword='admin123'
 
     if(email == defaultEmail && password== defaultPassword){
-        window.location.href="home.html"
+        window.location.assign("home.html");
     }
     else{
         document.getElementById('my_modal_5').showModal();

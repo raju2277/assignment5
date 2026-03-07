@@ -1,3 +1,5 @@
+
+
 const tabContainer=document.getElementById('button-tab'); //buttoncontainer
 
 
@@ -18,6 +20,20 @@ tabContainer.addEventListener("click",(event)=>{
     }
 });
 
+//spinner section
+ const manageSpinner=(status)=>{
+    if(status==true){
+        document.getElementById("spinner").classList.remove('hidden');
+        document.getElementById("containers").classList.add('hidden');
+    }
+    else if(status==false){
+       document.getElementById("spinner").classList.add('hidden');
+       document.getElementById("containers").classList.remove('hidden'); 
+    }
+ }
+
+ //display container
+
 const displayContainer=(id)=>{
     const container=document.getElementById(`${id}-container`);
     containerParent=container.parentNode;
@@ -34,16 +50,21 @@ const displayContainer=(id)=>{
 //load and fetch servers data
 
 const loadServers=()=>{
+    manageSpinner(true);
     const url=('https://phi-lab-server.vercel.app/api/v1/lab/issues')
     fetch(url)
     .then(res=>res.json())
-    .then((json)=>displayServers(json.data));
+    .then((json)=>{
+        displayServers(json.data);
+    manageSpinner(false);
+    })
 }
 loadServers();
 
 // labels creation
 
 const createElements=(labels)=>{
+    
     const htmlElements=labels.map((label)=>{
         if(label == 'bug'){
            return `<button class="px-2 py-2 h-fit w-fit text-[#EF4444] bg-[#FEECEC] rounded-full"><i class="fa-solid fa-bug"></i> ${label}</button>`;
@@ -72,8 +93,8 @@ const displayServers=(servers)=>{
     const closeContainer=document.getElementById('close-container');
     closeContainer.innerHTML="";
 
+    //spinner function call 
     
-
     servers.forEach(server=>{
         
 
@@ -111,7 +132,6 @@ const displayServers=(servers)=>{
            allContainer.appendChild(card);
            const cloneCard=card.cloneNode(true);
            openContainer.appendChild(cloneCard);
-           
         }
         else if(server.status == 'closed'){
             //priority color selection
@@ -145,6 +165,7 @@ const displayServers=(servers)=>{
            allContainer.appendChild(card);
            const cloneCard=card.cloneNode(true);
            closeContainer.appendChild(cloneCard);
+           //manageSpinner(false);
         }
         
     })
@@ -286,3 +307,19 @@ const displayModal=(server)=>{
         }
     
 }
+
+//search section 
+
+document.getElementById('search-btn').addEventListener("click",()=>{
+    const searchInput=document.getElementById('search-box');
+    const searchValue=searchInput.value;
+    const allContainer=document.getElementById('all-container');
+
+    const url=`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchValue}`
+    fetch(url)
+    .then((res)=>res.json())
+    .then((data)=>{
+        displayServers(data.data);
+        total(allContainer);
+    });
+})
