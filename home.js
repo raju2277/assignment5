@@ -87,7 +87,7 @@ const displayServers=(servers)=>{
            //will append those file are opened
             const card=document.createElement('div')
            card.innerHTML=`
-                <div id="${server.id}" onclick="my_modal_5.showModal();openModal(${server.id});"  class="shadow-md rounded-sm border-t-3 border-green-500 h-full">
+                <div id="${server.id}" onclick="openModal(${server.id})"  class="shadow-md rounded-sm border-t-3 border-green-500 h-full">
                             <div class="p-[14px] space-y-2">
                                 <div class=" flex  justify-between items-center">
                                 <img class="w-[24px] h-[24px]" src="./B13-A5-Github-Issue-Tracker/assets/Open-Status.png" alt="">
@@ -123,7 +123,7 @@ const displayServers=(servers)=>{
             //card creation for innerhtml
             const card=document.createElement('div')
            card.innerHTML=`
-                <div onclick="my_modal_5.showModal()" class="shadow-md rounded-sm border-t-3 border-purple-500 h-full">
+                <div id="${server.id}" onclick="openModal(${server.id})" class="shadow-md rounded-sm border-t-3 border-purple-500 h-full">
                             <div class="p-[14px] space-y-2">
                                 <div class=" flex  justify-between items-center">
                                 <img class="w-[24px] h-[24px]" src="./B13-A5-Github-Issue-Tracker/assets/Closed- Status .png" alt="">
@@ -169,6 +169,120 @@ const openModal=async(id)=>{
     const url=`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`;
     const res=await fetch(url);
     const data=await res.json();
-    console.log(data.data);
+    displayModal(data.data);
 
+};
+
+const displayModal=(server)=>{
+    const modalContainer=document.getElementById('modal-container');
+    modalContainer.innerHTML="";
+
+    
+             if(server.status == 'open'){
+            //priority color selection
+            const priorityColor={
+                high:'text-[#EF4444] bg-[#FEECEC]',
+                medium:'text-[#F59E0B] bg-[#FFF6D1]',
+                low:'text-[#9CA3AF] bg-[#EEEFF2]'
+            }
+           //will append those file are opened
+            const card=document.createElement('div')
+           card.innerHTML=`
+                
+            <div  class="space-y-3">
+                    <h2 class="font-4xl font-bold">${server.title}</h2>
+                    <div class="flex gap-2 items-center">
+                        <button class="rounded-full bg-green-700 px-2 text-white">Opened</button>
+                        <p class="text-[#64748B] flex items-center gap-1"><span class="w-[6px] h-[6px] bg-[#64748B] inline-block rounded-full "></span> Opened by ${server.author}</p>
+                        <p class="text-[#64748B] flex items-center gap-1"><span class="w-[6px] h-[6px] bg-[#64748B] inline-block rounded-full "></span>${server.createdAt.split("T")[0]} </p>
+                    </div>
+
+                    <div class="">
+                             ${createElements(server.labels)}
+                    </div>
+
+                    <p class="text-[#64748B]">${server.description}</p>
+
+                    <div class="flex justify-evenly">
+                        <div>
+                            <p class="text-[#64748B]">Assignee:</p> 
+                            <h2 class="font-bold">${server.assignee?server.assignee:"Not Found"}</h2>
+                        </div>
+                        <div class="gap-2">
+                            <p class="text-[#64748B] ml-[10px]">Priority:</p>
+                           <button class="px-3 py-1 ${priorityColor[server.priority]}  rounded-full">${server.priority}</button>
+
+                            
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <form method="dialog">
+                    <!-- if there is a button in form, it will close the modal -->
+                    <button class="btn btn-primary float-end">Close</button>
+                </form>
+           
+           
+           `;
+        //    openContainer.appendChild(card);
+           modalContainer.appendChild(card);
+           document.getElementById('my_modal_5').showModal();
+           
+        }
+        else  if(server.status == 'closed'){
+            //priority color selection
+            const priorityColor={
+                high:'text-[#EF4444] bg-[#FEECEC]',
+                medium:'text-[#F59E0B] bg-[#FFF6D1]',
+                low:'text-[#9CA3AF] bg-[#EEEFF2]'
+            }
+           //will append those file are opened
+            const card=document.createElement('div')
+           card.innerHTML=`
+                
+            <div  class="space-y-3">
+                    <h2 class="font-4xl font-bold">${server.title}</h2>
+                    <div class="flex gap-2 items-center">
+                        <button class="rounded-full bg-red-700 px-2 text-white">Closed</button>
+                        <p class="text-[#64748B] flex items-center gap-1"><span class="w-[6px] h-[6px] bg-[#64748B] inline-block rounded-full "></span> Closed by ${server.author}</p>
+                        <p class="text-[#64748B] flex items-center gap-1"><span class="w-[6px] h-[6px] bg-[#64748B] inline-block rounded-full "></span>${server.createdAt.split("T")[0]} </p>
+                    </div>
+
+                    <div class="">
+                             ${createElements(server.labels)}
+                    </div>
+
+                    <p class="text-[#64748B]">${server.description}</p>
+
+                    <div class="flex justify-evenly">
+                        <div>
+                            <p class="text-[#64748B]">Assignee:</p> 
+                            <h2 class="font-bold">${server.assignee?server.assignee:"Not Found"}</h2>
+                        </div>
+                        <div class="gap-2">
+                            <p class="text-[#64748B] ml-[10px]">Priority:</p>
+                           <button class="px-3 py-1 ${priorityColor[server.priority]}  rounded-full">${server.priority}</button>
+
+                            
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <form method="dialog">
+                    <!-- if there is a button in form, it will close the modal -->
+                    <button class="btn btn-primary float-end">Close</button>
+                </form>
+           
+           
+           `;
+        //    openContainer.appendChild(card);
+           modalContainer.appendChild(card);
+           document.getElementById('my_modal_5').showModal();
+           
+        }
+    
 }
