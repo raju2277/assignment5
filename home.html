@@ -3,9 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Home</title>
+
+    <!-- daisyui cdn -->
+     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+     <!-- google fonts -->
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+
+      <!-- font awesome -->
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+       <style>
+        *{
+            font-family: "Geist", sans-serif;
+        }
+       </style>
 </head>
 <body>
-    
+    <!-- navbar section -->
+     <div class=" navbar bg-base-100 shadow">
+  <div class="flex-1 ml-[40px]">
+    <span class="flex">
+        <img class="w-[40px]" src="./B13-A5-Github-Issue-Tracker/assets/github-logo.png" alt="">
+        <a class="ml-2 flex items-center text-2xl font-bold text-[#1F2937]">GitHub Issues Tracker</a>
+    </span>
+  </div>
+  <div class="flex gap-2 mr-[40px]">
+        <div class="flex gap-2">
+  <div>
+    <label class="input">
+  <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <g
+      stroke-linejoin="round"
+      stroke-linecap="round"
+      stroke-width="2.5"
+      fill="none"
+      stroke="currentColor"
+    >
+      <circle cx="11" cy="11" r="8"></circle>
+      <path d="m21 21-4.3-4.3"></path>
+    </g>
+  </svg>
+  <input type="search" required placeholder="Search issues..." />
+</label>
+
+  </div>
+  <button class="btn btn-primary join-item"><i class="fa-solid fa-plus"></i> New Issue</button>
+</div>
+  </div>
+     </div>
+
+      <!-- tabs section -->
+     <section class="tabs-container w-3/4 mx-auto mt-[60px]">
+        <div id="button-tab">
+            <button id="all" class="btn px-10 btn-primary">All</button>
+            <button id="open" class="btn px-10">Open</button>
+            <button id="close" class="btn px-10">close</button>
+        </div>
+
+        <div class="mt-[30px] flex  justify-between">
+            <div class="flex gap-2 w-full ">
+                <img src="./B13-A5-Github-Issue-Tracker/assets/Aperture.png" alt="">
+                <div class="">
+                    <h2 class="font-semibold text-xl"><span id="count">50 </span> Issues</h2>
+                    <p class="text-[#64748B]">Track and manage your project issues</p>
+                </div>
+            </div>
+            <div class="flex gap-2">
+                <p class="flex items-center gap-1"><span class="inline-block w-[12px] h-[12px] bg-green-600 rounded-full"></span> Open</p>
+                <p class="flex items-center gap-1"><span class="inline-block w-[12px] h-[12px] bg-purple-600 rounded-full"></span> Closed</p>
+            </div>
+        </div>
+
+        <!-- all content display -->
+         <div id="containers" class="">
+                <div id="all-container" class="m-[24px] grid grid-cols-4 gap-[12px]">
+                        <!-- <div  class="shadow-md rounded-sm border-t-3 border-green-500">
+                            <div class="p-[14px] space-y-2">
+                                <div class=" flex  justify-between items-center">
+                                <img class="w-[24px] h-[24px]" src="./B13-A5-Github-Issue-Tracker/assets/Closed- Status .png" alt="">
+                                <button class="px-8 py-1 text-[#EF4444] bg-[#FEECEC] rounded-full">High</button>
+                                </div>
+                                <h2 class="text-[#1F2937] font-semibold">Fix navigation menu on mobile devices</h2>
+                                <p class="text-[#64748B] text-sm">The navigation menu doesn't collapse properly on mobile devices...</p>
+                                <div class="">
+                                    <button class="px-2 py-2 text-[#EF4444] bg-[#FEECEC] rounded-full"><i class="fa-solid fa-bug"></i>Bug</button>
+                                    <button class="px-2 py-1 text-[#D97706] bg-[#FDE68A] rounded-full"><i class="fa-solid fa-life-ring"></i>Help Wanted</button>
+                                </div>
+                                    <hr class="text-[#64748B50] my-4">
+                                <p class="text-[#64748B] text-sm">#1by john_doe</p>
+                                <p class="text-[#64748B] text-sm">1/15/2024</p>
+                             </div>
+                        </div> -->
+                       
+                </div>
+
+                <div id="open-container" class="hidden m-[24px] grid grid-cols-4 gap-[12px]">
+                    
+                </div>
+
+                <div id="close-container" class="m-[24px] grid grid-cols-4 gap-[12px] hidden">
+                    
+                </div>
+         </div>
+
+
+     </section>
+
+
+     <script src="./home.js"></script>
 </body>
 </html>
