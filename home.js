@@ -239,7 +239,7 @@ const displayModal=(server)=>{
                 low:'text-[#9CA3AF] bg-[#EEEFF2]'
             }
            //will append those file are opened
-            const card=document.createElement('div')
+            const card=document.createElement('div');
            card.innerHTML=`
                 
             <div  class="space-y-3">
